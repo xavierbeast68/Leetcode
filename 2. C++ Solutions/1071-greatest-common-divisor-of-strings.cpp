@@ -1,3 +1,5 @@
+//* https://leetcode.com/problems/greatest-common-divisor-of-strings/
+
 class Solution {
 public:
     string joinwords(string base, int times){

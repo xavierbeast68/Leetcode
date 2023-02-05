@@ -1,3 +1,5 @@
+//* https://leetcode.com/problems/removing-minimum-and-maximum-from-array/
+
 class Solution {
 public:
     int minimumDeletions(vector<int>& nums) {
