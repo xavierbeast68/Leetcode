@@ -21,6 +21,11 @@ public:
     }
     vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
         vector<int> temp;
+        sort(candidates.begin(), candidates.end());
+        
+        // remove duplicates
+        candidates.erase(unique(candidates.begin(), candidates.end()), candidates.end());
+
         dfs(temp, candidates, target, 0);
         return ans;
     }
