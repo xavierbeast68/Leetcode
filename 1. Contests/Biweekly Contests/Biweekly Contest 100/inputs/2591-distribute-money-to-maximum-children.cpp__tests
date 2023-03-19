@@ -1,0 +1,16 @@
+[
+	{
+		"correct_answers":
+		[
+			"1\n\nTime: 6.23333 s"
+		],
+		"test": "20 3\n"
+	},
+	{
+		"correct_answers":
+		[
+			"2\n\nTime: 1.97388 s"
+		],
+		"test": "16 2\n"
+	}
+]
