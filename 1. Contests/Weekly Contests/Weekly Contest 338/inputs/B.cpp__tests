@@ -1,0 +1,57 @@
+[
+	{
+		"correct_answers":
+		[
+			"0\n\nTime: 2.9e-05 s",
+			"0\n\nTime: 3.2e-05 s"
+		],
+		"test": "2\n17 2\n"
+	},
+	{
+		"correct_answers":
+		[
+			"1\n\nTime: 3.1e-05 s",
+			"1\n\nTime: 2.9e-05 s"
+		],
+		"test": "2\n998 2\n"
+	},
+	{
+		"correct_answers":
+		[
+			"1\n\nTime: 3.4e-05 s",
+			"1\n\nTime: 5.6e-05 s"
+		],
+		"test": "4\n4 9 6 10\n"
+	},
+	{
+		"correct_answers":
+		[
+			"1\n\nTime: 3.7e-05 s",
+			"1\n\nTime: 3.5e-05 s"
+		],
+		"test": "4\n6 8 11 12\n"
+	},
+	{
+		"correct_answers":
+		[
+			"0\n\nTime: 2.9e-05 s"
+		],
+		"test": "3\n5 8 3\n"
+	},
+	{
+		"correct_answers":
+		[
+			"1\n\nTime: 3.9e-05 s",
+			"1\n\nTime: 5.6e-05 s"
+		],
+		"test": "2\n998 2\n"
+	},
+	{
+		"correct_answers":
+		[
+			"0\n\nTime: 3e-05 s",
+			"0\n\nTime: 5e-05 s"
+		],
+		"test": "2\n2 2\n"
+	}
+]
