@@ -9,7 +9,7 @@
 */
 /**
  * xavierbeast68
- * URL : https://leetcode.com/problems/prime-in-diagonal/
+ * URL : https://leetcode.com/contest/weekly-contest-340/problems/prime-in-diagonal
  * AVOIDING COMPLEXITY, REDUCES BUGS.
  */
 
