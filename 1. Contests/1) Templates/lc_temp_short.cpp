@@ -126,7 +126,7 @@ void solve(){
     // Let's Code
     // read parameters
     Solution obj;
-    auto ans //= obj.function_name(parameters) ;
+    auto ans //= obj.function_name(parameters);
     cout << ans << endl;
 }
 
