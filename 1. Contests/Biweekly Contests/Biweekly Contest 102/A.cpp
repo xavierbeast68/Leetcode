@@ -9,7 +9,7 @@
 */
 /**
  * xavierbeast68
- * URL : Problem_URL
+ * URL : https://leetcode.com/contest/biweekly-contest-102/problems/find-the-width-of-columns-of-a-grid/
  * AVOIDING COMPLEXITY, REDUCES BUGS.
  */
 
@@ -88,7 +88,6 @@ template <class T> void _print(multiset <T> v);
 template <class T, class V> void _print(pair <T, V> p) {cerr << "{"; _print(p.first); cerr << ","; _print(p.second); cerr << "}";}
 template <class T> void _print(vector <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
 template <class T> void _print(set <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
-template <class T> void _print(unordered_set <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
 template <class T> void _print(multiset <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
 template <class T, class V> void _print(map <T, V> v) {cerr << "[ "; for (auto i : v) {_print(i); cerr << " ";} cerr << "]";}
 template <class T, class V> void _print(unordered_map <T, V> v) {cerr << "[ "; for (auto i : v) {_print(i); cerr << " ";} cerr << "]";}
@@ -104,15 +103,14 @@ ll log_a_to_base_b(ll a, ll b)                      {return log2(a) / log2(b);}
 ll isPowerof2(ll x)                                 {return (x && !(x & (x - 1)));} // Checking if given 64 bit integer is power of 2
 bool is_whole(ll a)                                 {return (a - floor(a) < 1e-9);} // floor(a)==ceil(a)
 ll factorial(const int& p)                          {if (p <= 1) {return 1;} return p * factorial(p - 1);}
-double nCr(ll n, ll r)                              {double sum = 1; for(int i = 1; i <= r; ++i){sum = sum * (n - r + i) / i;} return sum;}
-ll binpow(ll a , ll b,ll MOD)                       {if (b == 0) {return 1;} if (b == 1) {return a;} if (b % 2 == 0) {return binpow((a * a) % MOD, b / 2, MOD);} else {return (a * binpow((a * a) % MOD, b / 2, MOD)) % MOD;}}    // binary exponentiation
-ll mod_inv(ll x, ll MOD)                            {return binpow(x, MOD-2, MOD);}    
+double nCr(ll n, ll r)                                  {double sum = 1; for(int i = 1; i <= r; ++i){sum = sum * (n - r + i) / i;} return sum;}
+ll binpow(ll a , ll b)                              {if (b == 0) {return 1;} if (b == 1) {return a;} if (b % 2 == 0) {return binpow((a * a) % MOD, b / 2);} else {return (a * binpow((a * a) % MOD, b / 2)) % MOD;}}    // binary exponentiation
 
-ll mod(ll x, ll MOD)                                {return (((x) % MOD + MOD) % MOD);}
-ll mod_add(ll a, ll b, ll MOD)                      {a = a % MOD; b = b % MOD; return (mod(a+b, MOD));}
-ll mod_mul(ll a, ll b, ll MOD)                      {a = a % MOD; b = b % MOD; return (mod(a*b, MOD));}
-ll mod_sub(ll a, ll b, ll MOD)                      {a = a % MOD; b = b % MOD; return (mod(a-b, MOD));}
-ll mod_div(ll a, ll b, ll MOD)                      {return mod(mod(a, MOD) * mod(mod_inv(b, MOD), MOD), MOD);}
+ll mod(ll x)                                        {return (((x) % MOD + MOD) % MOD);}
+ll mod_add(ll a, ll b)                              {a = a % MOD; b = b % MOD; return (mod(a+b));}
+ll mod_mul(ll a, ll b)                              {a = a % MOD; b = b % MOD; return (mod(a*b)); }
+ll mod_sub(ll a, ll b)                              {a = a % MOD; b = b % MOD; return (mod(a-b));}
+
 
 // random number generator
 mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
@@ -146,18 +144,48 @@ void buildSieve(){
 ------------------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------||||||||||------------------------------------------------------------------------*/
 
-
 class Solution {
 public:
-    // function->
+    int Digit(int n) {
+        return (floor(log10(n) + 1));
+    }
+    vector<int> findColumnWidth(vector<vector<int>>& grid) {
+        int m = grid.size();
+        int n = grid[0].size();
+
+        vector<int> ans(n);
+
+        for(int j = 0; j < n; j++){
+            int maxi = 1;
+            for(int i = 0;i < m; i++){
+                int digits;
+                if(grid[i][j] == 0){
+                    digits = 1;
+                }
+                else if(grid[i][j] < 0){
+                    digits = Digit(abs(grid[i][j])) + 1;
+                }
+                else{
+                    digits = Digit(grid[i][j]);
+                }
+
+                maxi = max(maxi, digits);
+            }
+
+            ans[j] = maxi;
+        }
+
+        return ans;
+    }
 };
 
-/*
 void solve(){
     // Let's Code
-    // read parameters
+    read(m);read(n);
+    vector<vector<int>> grid(m, vector<int> (n,0));
+    cin >> grid;
     Solution obj;
-    auto ans //= obj.function_name(parameters);
+    auto ans = obj.findColumnWidth(grid) ;
     cout << ans << endl;
 }
 
@@ -199,4 +227,3 @@ signed main(){
 
     return 0;
 }
-*/

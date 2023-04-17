@@ -9,7 +9,7 @@
 */
 /**
  * xavierbeast68
- * URL : Problem_URL
+ * URL : https://leetcode.com/contest/biweekly-contest-102/problems/find-the-score-of-all-prefixes-of-an-array/
  * AVOIDING COMPLEXITY, REDUCES BUGS.
  */
 
@@ -104,15 +104,14 @@ ll log_a_to_base_b(ll a, ll b)                      {return log2(a) / log2(b);}
 ll isPowerof2(ll x)                                 {return (x && !(x & (x - 1)));} // Checking if given 64 bit integer is power of 2
 bool is_whole(ll a)                                 {return (a - floor(a) < 1e-9);} // floor(a)==ceil(a)
 ll factorial(const int& p)                          {if (p <= 1) {return 1;} return p * factorial(p - 1);}
-double nCr(ll n, ll r)                              {double sum = 1; for(int i = 1; i <= r; ++i){sum = sum * (n - r + i) / i;} return sum;}
-ll binpow(ll a , ll b,ll MOD)                       {if (b == 0) {return 1;} if (b == 1) {return a;} if (b % 2 == 0) {return binpow((a * a) % MOD, b / 2, MOD);} else {return (a * binpow((a * a) % MOD, b / 2, MOD)) % MOD;}}    // binary exponentiation
-ll mod_inv(ll x, ll MOD)                            {return binpow(x, MOD-2, MOD);}    
+double nCr(ll n, ll r)                                  {double sum = 1; for(int i = 1; i <= r; ++i){sum = sum * (n - r + i) / i;} return sum;}
+ll binpow(ll a , ll b)                              {if (b == 0) {return 1;} if (b == 1) {return a;} if (b % 2 == 0) {return binpow((a * a) % MOD, b / 2);} else {return (a * binpow((a * a) % MOD, b / 2)) % MOD;}}    // binary exponentiation
 
-ll mod(ll x, ll MOD)                                {return (((x) % MOD + MOD) % MOD);}
-ll mod_add(ll a, ll b, ll MOD)                      {a = a % MOD; b = b % MOD; return (mod(a+b, MOD));}
-ll mod_mul(ll a, ll b, ll MOD)                      {a = a % MOD; b = b % MOD; return (mod(a*b, MOD));}
-ll mod_sub(ll a, ll b, ll MOD)                      {a = a % MOD; b = b % MOD; return (mod(a-b, MOD));}
-ll mod_div(ll a, ll b, ll MOD)                      {return mod(mod(a, MOD) * mod(mod_inv(b, MOD), MOD), MOD);}
+ll mod(ll x)                                        {return (((x) % MOD + MOD) % MOD);}
+ll mod_add(ll a, ll b)                              {a = a % MOD; b = b % MOD; return (mod(a+b));}
+ll mod_mul(ll a, ll b)                              {a = a % MOD; b = b % MOD; return (mod(a*b)); }
+ll mod_sub(ll a, ll b)                              {a = a % MOD; b = b % MOD; return (mod(a-b));}
+
 
 // random number generator
 mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
@@ -149,15 +148,27 @@ void buildSieve(){
 
 class Solution {
 public:
-    // function->
+    vector<long long> findPrefixScore(vector<int>& nums) {
+        vector<long long> ans;
+        long long curr_max = LONG_MIN, curr_score = 0;
+        
+        for(long long i : nums){
+            curr_max = max(curr_max, i);
+
+            curr_score += (curr_max + i);
+            ans.push_back(curr_score);
+        }
+        return ans;
+    }
 };
 
-/*
+
 void solve(){
     // Let's Code
-    // read parameters
+    vector<int> nums;
+    cin >> nums;
     Solution obj;
-    auto ans //= obj.function_name(parameters);
+    auto ans = obj.findPrefixScore(nums);
     cout << ans << endl;
 }
 
@@ -199,4 +210,3 @@ signed main(){
 
     return 0;
 }
-*/
