@@ -13,20 +13,39 @@
  * AVOIDING COMPLEXITY, REDUCES BUGS.
  */
 
+
+//*****************************************************TEMPLATE START*****************************************************************
+
 #include <bits/stdc++.h>
 
 using namespace std;
 using namespace chrono;
 
+#define fastio                                      ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL)
 #define endl                                        '\n'
 using ll                                            = long long;
+using ull                                           = unsigned long long;
 using lld                                           = long double;
-#define vi                                          vector<int>
-#define vvi                                         vector<vi>
+typedef pair<int, int>                              pi;
+typedef pair<ll, ll>                                pll;
+typedef vector<int>                                 vi;
+typedef vector<ll>                                  vl;
+typedef vector<pi>                                  vpi;
+typedef vector<pll>                                 vpll;
+typedef vector<vi>                                  vvi;
+typedef vector<vl>                                  vvl;
+typedef vector<vpi>                                 vvpi;
+typedef vector<vpll>                                vvpll;
+typedef vector<bool>                                vb;
 
+
+constexpr ll MOD1                                   = 1e9 + 7; //1000000007
+constexpr ll MOD2                                   = 1e9 + 9; //1000000009
+constexpr ll MOD3                                   = 998244353;
 constexpr lld EPS                                   = 1e-9;
-constexpr ll MOD                                    = 1e9 + 7; //1000000007
-constexpr ll mod1                                   = 998244353;
+constexpr lld PI                                    = 3.1415926535897932384626;
+#define inf                                         INT_MAX
+#define minf                                        INT_MIN
 
 #define FOR(i,a,b)                                  for(int i = a; i < b; ++i)
 
@@ -37,6 +56,8 @@ constexpr ll mod1                                   = 998244353;
 #define mp(x,y)                                     make_pair(x,y)
 #define lb(arr, x)                                  lower_bound(arr.begin(), arr.end(), x) - arr.begin();
 #define ub(arr, x)                                  upper_bound(arr.begin(), arr.end(), x) - arr.begin();
+#define uniq(x)                                     (x).erase(unique(all(x)), (x).end())
+#define getunique(v)                                {sort(all(v)); v.erase(unique(all(v)), v.end());} // for Vector v
 
 
 /*------------------------------------------------------Read & Print Methods------------------------------------------------------*/
@@ -85,6 +106,11 @@ ll mod_mul(ll a, ll b, ll mod)                      {a = a % mod; b = b % mod; r
 ll mod_sub(ll a, ll b, ll mod)                      {a = a % mod; b = b % mod; return (_mod(a-b, mod));}
 ll mod_div(ll a, ll b, ll mod)                      {return _mod(_mod(a, mod) * _mod(mod_inv(b, mod), mod), mod);}
 
+vector<string> split(string s, char delimeter)      {vector <string> tokens; stringstream check1(s); string intermediate; while (getline(check1, intermediate, delimeter)) { tokens.push_back(intermediate); } return tokens;}
+ll stringToNo(string s)                             {stringstream din(s); ll x; din >> x; return x;}
+void toLower(string& s)                             {transform(s.begin(), s.end(), s.begin(), ::tolower);}
+void toUpper(string& s)                             {transform(s.begin(), s.end(), s.begin(), ::toupper);}
+
 // random number generator
 mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
 ll getRandomNumber(ll l, ll r)                      {return uniform_int_distribution<ll>(l, r)(rng); }
@@ -108,6 +134,11 @@ void buildSieve(){
     }
 }
 
+//--for grid operations--
+int dx[] = { 0,1,0,-1 };
+int dy[] = { 1,0,-1,0 };
+
+//*********************************************************TEMPLATE ENDS***************************************************************
 
 /*-------------------------------------------------------||||||||||-----------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------------------------
@@ -116,6 +147,28 @@ void buildSieve(){
                                         +-+ +-+ +-+ +-+   +-+ +-+   +-+ +-+ +-+ +-+ +-+
 ------------------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------||||||||||------------------------------------------------------------------------*/
+
+#define int                                         long long
+
+/*
+! THINGS TO KEEP IN MIND BEFORE SUBMITTTING
+* Always Check Which MOD it is Asking For
+* Unique function return iterator Then We can resize the container
+* Look for Possible Edge Cases
+* int overflows, array bounds, etc.
+* https://oeis.org/ Sequence Related Problem
+* a+b=a|b+a&b
+* a+b=a^b+2*(a&b)
+* DO NOT GET STUCK ON ONE APPROACH
+* DO NOT GET STUCK ON ONE APPROACH
+* DO NOT GET STUCK ON ONE APPROACH
+*/
+
+/*
+    *Thought Process*
+    !---------------!
+
+*/
 
 
 class Solution {
@@ -128,7 +181,7 @@ void solve(){
     // Let's Code
     // read parameters
     Solution obj;
-    auto ans //= obj.function_name(parameters);
+    auto ans //= obj.function_name(parameters) ;
     cout << ans << endl;
 }
 
