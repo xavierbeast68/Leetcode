@@ -16,6 +16,8 @@
 
 //*****************************************************TEMPLATE START*****************************************************************
 
+#pragma GCC optimize("O3,Ofast,unroll-loops")
+
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -23,7 +25,6 @@ using namespace chrono;
 
 #define fastio                                      ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL)
 #define endl                                        '\n'
-#define cendl                                       cout << endl;
 #define int                                         long long
 using ll                                            = long long;
 using ull                                           = unsigned long long;
@@ -61,12 +62,10 @@ constexpr lld PI                                    = 3.1415926535897932384626;
 #define uniq(x)                                     (x).erase(unique(all(x)), (x).end())
 #define getunique(v)                                {sort(all(v)); v.erase(unique(all(v)), v.end());} // for Vector v
 
-
 /*------------------------------------------------------Read & Print Methods------------------------------------------------------*/
 
-#define read(x)                                     cin >> x;    
-#define readInt(x)                                  int x; cin >> x; // reads long long
-#define readStr(x)                                  string x; cin >> x; // reads string(word)
+#define read(x)                                     int x; cin >> x; // reads long long
+#define readstr(x)                                  string x; cin >> x; // reads string(word)
 #define readLine(x)                                 string x; getline(cin, x); // reads string(sentence)
 #define print(x)                                    cout<<(x)<<" "
 #define println(x)                                  cout<<(x)<<endl
@@ -81,13 +80,45 @@ template<class T>istream& operator>>(istream &in, vector<T> &a){for(auto &i: a){
 template<class T, class V>ostream& operator<<(ostream &os, pair<T, V> &a){os << a.F << " " << a.S;return os;}
 template<class T>ostream& operator<<(ostream &os, vector<T> &a){for(int i = 0 ; i < sz(a) ; i++){if(i != 0){os << ' ';}os << a[i];}return os;}
 
-
 /*--------------------------------------------------------------Debugger--------------------------------------------------------------*/
 //            [di:b^b-ing]
 // -Being the detective in a crime
 //  where you are also the murderer.
 
 #define test(i)                                     cerr << "(#" << i << ")" << endl
+
+// #ifndef ONLINE_JUDGE
+#ifdef XAVIERBEAST
+#define dbg(x)                                      cerr << #x<<" "; _print(x); cerr << endl;
+#else
+#define dbg(x);
+#endif
+
+// #pragma warning disable format
+
+// void _print(int t) {cerr << t;}
+void _print(ll t) {cerr << t;}
+void _print(string t) {cerr << t;}
+void _print(char t) {cerr << t;}
+void _print(lld t) {cerr << t;}
+void _print(double t) {cerr << t;}
+void _print(ull t) {cerr << t;}
+
+template <class T, class V> void _print(pair <T, V> p);
+template <class T> void _print(vector <T> v);
+template <class T> void _print(set <T> v);
+template <class T, class V> void _print(map <T, V> v);
+template <class T> void _print(multiset <T> v);
+
+template <class T, class V> void _print(pair <T, V> p) {cerr << "{"; _print(p.first); cerr << ","; _print(p.second); cerr << "}";}
+template <class T> void _print(vector <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
+template <class T> void _print(set <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
+template <class T> void _print(unordered_set <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
+template <class T> void _print(multiset <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
+template <class T, class V> void _print(map <T, V> v) {cerr << "[ "; for (auto i : v) {_print(i); cerr << " ";} cerr << "]";}
+template <class T, class V> void _print(unordered_map <T, V> v) {cerr << "[ "; for (auto i : v) {_print(i); cerr << " ";} cerr << "]";}
+template <class T> void _print(deque <T> v) { cerr << "[ "; for (T i : v) { _print(i); cerr << " "; } cerr << "]";}
+template <class T> void _print(stack <T> v) { cerr << "[ "; while(!v.empty()) { _print(v.top()); v.pop(); cerr << " "; } cerr << "]";}
 
 /*------------------------------------------------------Functions------------------------------------------------------*/
 
@@ -114,6 +145,7 @@ ll stringToNo(string s)                             {stringstream din(s); ll x; 
 void toLower(string& s)                             {transform(s.begin(), s.end(), s.begin(), ::tolower);}
 void toUpper(string& s)                             {transform(s.begin(), s.end(), s.begin(), ::toupper);}
 
+
 // random number generator
 mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
 ll getRandomNumber(ll l, ll r)                      {return uniform_int_distribution<ll>(l, r)(rng); }
@@ -137,9 +169,37 @@ void buildSieve(){
     }
 }
 
+/*
+//--- Custom Hash(for random hashing)---
+// https://codeforces.com/blog/entry/62393
+struct custom_hash
+{
+    static uint64_t splitmix64(uint64_t x)
+    {
+        x += 0x9e3779b97f4a7c15;
+        x = (x ^ (x >> 30)) * 0xbf58476d1ce4e5b9;
+        x = (x ^ (x >> 27)) * 0x94d049bb133111eb;
+        return x ^ (x >> 31);
+    }
+
+    size_t operator()(uint64_t x) const
+    {
+        static const uint64_t FIXED_RANDOM = chrono::steady_clock::now().time_since_epoch().count();
+        return splitmix64(x + FIXED_RANDOM);
+    }
+};
+template <typename T> // Key should be integer type
+using safe_set = unordered_set<T, custom_hash>;
+template <typename T1, typename T2> // Key should be integer type
+using safe_map = unordered_map<T1, T2, custom_hash>;
+*/
+
 //--for grid operations--
 int dx[] = { 0,1,0,-1 };
 int dy[] = { 1,0,-1,0 };
+
+// #pragma warning restore format
+
 
 //*********************************************************TEMPLATE ENDS***************************************************************
 
@@ -159,13 +219,17 @@ int dy[] = { 1,0,-1,0 };
 * Look for Possible Edge Cases
 * int overflows, array bounds, etc.
 * https://oeis.org/ Sequence Related Problem
+* a+b=a|b+a&b
+* a+b=a^b+2*(a&b)
+* DO NOT GET STUCK ON ONE APPROACH
+* DO NOT GET STUCK ON ONE APPROACH
 * DO NOT GET STUCK ON ONE APPROACH
 */
 
 /*
     *Thought Process*
     !---------------!
-
+    
 */
 
 
@@ -179,15 +243,31 @@ void solve(){
     // Let's Code
     // read parameters
     Solution obj;
-    auto ans //= obj.function_name(parameters) ;
+    auto ans //= obj.function_name(parameters);
     cout << ans << endl;
 }
 
 //---------------------------------------- DON'T TOUCH IT ----------------------------------------
 
+#define fastio                                      ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL)
+
+//InputOutputError_From/To_File ->
+void file_io(){
+// #ifndef ONLINE_JUDGE
+#ifdef XAVIERBEAST
+    freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);
+    freopen("error.txt", "w", stderr);
+#endif
+}
+
+// signed main(signed argc, char const *argv[])
 signed main(){
+    fastio;
 
     cout << fixed << setprecision(10);
+    // file_io();
+    auto start = high_resolution_clock::now();
 
     //testcases=1: default value for single test case
     int testcases = 1;
@@ -195,6 +275,13 @@ signed main(){
     while (testcases--){
         solve();
     }
+
+    auto stop = high_resolution_clock::now();
+    auto duration = duration_cast<microseconds>(stop - start);
+    // #ifndef ONLINE_JUDGE
+    #ifdef XAVIERBEAST
+        cerr << endl << "Time: " << (float)duration.count()/1000000 << " s" << endl;
+    #endif
 
     return 0;
 }
