@@ -76,9 +76,9 @@ constexpr lld PI                                    = 3.1415926535897932384626;
 // template <class T> void printvector(vector<T> arr) {for (int i = 0; i < (int)arr.size(); i++) {cout << arr[i] << " ";} cout << endl;}   // printvector(arr, n);
 
 // Streams ->
-template<class T, class V>istream& operator>>(istream &in, pair<T, V> &a){in >> a.F >> a.S;return in;}
+template<class T, class V>istream& operator>>(istream &in, pair<T, V> &a){in >> a.first >> a.second;return in;}
 template<class T>istream& operator>>(istream &in, vector<T> &a){for(auto &i: a){in >> i;} return in;}
-template<class T, class V>ostream& operator<<(ostream &os, pair<T, V> &a){os << a.F << " " << a.S;return os;}
+template<class T, class V>ostream& operator<<(ostream &os, pair<T, V> &a){os << a.first << " " << a.second;return os;}
 template<class T>ostream& operator<<(ostream &os, vector<T> &a){for(int i = 0 ; i < sz(a) ; i++){if(i != 0){os << ' ';}os << a[i];}return os;}
 
 
